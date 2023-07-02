@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "inv-aki"
+version = "0.1.0"
+description = "Inverse Akinator Game"
+authors = ["komot <komotaymkty@gmail.com>"]
+readme = "README.md"
+packages = [
+    {include = "inv_aki"},
+    ]
+include = ["lib"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pygame = "^2.5.0"
+openai = "^0.27.8"
+
+[tool.poetry.scripts]
+inv_aki = 'inv_aki.app:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
