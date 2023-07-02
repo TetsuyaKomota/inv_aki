@@ -82,6 +82,14 @@ class MainFrame:
         bubble = pygame.image.load(MainFrame.BUBBLE_PATH)
         return bubble
 
+    def parse_text(self, text):
+        texts = []
+        t = text
+        while t:
+            texts.append(t[:20])
+            t = t[20:]
+        return "\n".join(texts)
+
     def _render_text(self, text_line, x, y):
         t = self.font.render(text_line, True, MainFrame.BLACK)
         self.screen.blit(t, (x, y))
@@ -143,7 +151,7 @@ class MainFrame:
                 self.chatgpt_answer = self.chatgpt.ask_answer(self.question)
                 self.question_count += 1
 
-            self.render_player_text(self.question.split("\n"))
+            self.render_player_text(self.parse_text(self.question).split("\n"))
 
             self.render_chatgpt_text(self.chatgpt_answer.split("\n"))
             self.render_question_count()
@@ -157,7 +165,7 @@ class MainFrame:
                 self.question = TextBox.popup("ChatGPTが何について回答しているか入力してください")
                 self.chatgpt_answer = self.chatgpt.judge(self.question)
 
-            self.render_player_text(self.question.split("\n"))
+            self.render_player_text(self.parse_text(self.question).split("\n"))
 
             self.render_chatgpt_text(self.chatgpt_answer.split("\n"))
             self.render_question_count()
